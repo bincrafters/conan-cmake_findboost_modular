@@ -1,47 +1,24 @@
-set(LEVEL5GROUP 
-	"concept_check"
-	"conversion"
-	"detail"
-	"function"
-	"function_types"
-	"functional"
-	"fusion"
-	"iterator"
-	"mpl"
-	"optional"
-	"type_index"
-	"typeof"
-	"utility"
+string(REPLACE "," ";" BOOST_LEVEL5GROUP
+	"${CONAN_USER_BOOST_LEVEL5GROUP_lib_short_names}"
 )
 
-set(LEVEL8GROUP 
-	"math"
-	"lexical_cast"
+string(REPLACE "," ";" BOOST_LEVEL8GROUP
+	"${CONAN_USER_BOOST_LEVEL8GROUP_lib_short_names}"
 )
 
-set(LEVEL11GROUP 
-	"date_time"
-	"locale"
-	"pool"
-	"serialization"
-	"spirit"
-	"thread"
+string(REPLACE "," ";" BOOST_LEVEL11GROUP
+	"${CONAN_USER_BOOST_LEVEL11GROUP_lib_short_names}"
 )
 
-set(LEVEL14GROUP 
-	"bimap"
-	"disjoint_sets"
-	"graph"
-	"graph_parallel"
-	"mpi"
-	"property_map"
+string(REPLACE "," ";" BOOST_LEVEL14GROUP
+	"${CONAN_USER_BOOST_LEVEL14GROUP_lib_short_names}"
 )
 
 set(LEVEL_GROUPS
-	LEVEL5GROUP
-	LEVEL8GROUP
-	LEVEL11GROUP
-	LEVEL14GROUP
+	BOOST_LEVEL5GROUP
+	BOOST_LEVEL8GROUP
+	BOOST_LEVEL11GROUP
+	BOOST_LEVEL14GROUP
 )
 
 set(COMPONENT_PROPERTIES 
@@ -51,36 +28,37 @@ set(COMPONENT_PROPERTIES
 	INTERFACE_COMPILE_OPTIONS
 )
 
-function(add_cloned_imported_target dst_target src_target)
-    foreach(property_name ${COMPONENT_PROPERTIES})
-        get_property(value TARGET ${src_target} PROPERTY ${property_name} )
-        set_property(TARGET ${dst_target} PROPERTY ${property_name} ${value})
+function(set_name_if_group target_name)
+    foreach(group_name ${LEVEL_GROUPS})
+		LIST(FIND BOOST_LEVEL5GROUP target_name FOUND_INDEX)
+		if(FOUND_INDEX GREATER_EQUAL 0)
+			message("found ${target_name} in group ${group_name}")
+			set(target_or_group_name ${group_name} PARENT_SCOPE)
+			break()
+		endif()
     endforeach()
+	message("${target_name} is not a member of any group")
+	set(target_or_group_name ${target_name} PARENT_SCOPE)
 endfunction()
 
-foreach(component ${Boost_FIND_COMPONENTS})
-	message("component: ${component}")
-	if(NOT TARGET Boost::${component})
-		message("Adding library: Boost::${component}")
-		add_library(Boost::${component} INTERFACE IMPORTED)
-		foreach(group_name ${LEVEL_GROUPS})
-			if (DEFINED boost_${component}_found)
-				if(${component} INLIST ${group_name})
-					message("found ${component} is member of group ${group_name}")
-					message("creating vars for ${component} under ${gro
-					up_name}")
-					add_cloned_imported_target(Boost::${component}, CONAN_PKG::boost_${group_name})
-					set(boost_${component}_found TRUE)
-					message("boost_${component}_found set to ${boost_${component}_found}")
-				endif()
+foreach(component ${Boost_FIND_COMPONENTS}) 
+	set(boost_target Boost::${component})
+    if(NOT TARGET boost_target)
+	    add_library("${boost_target}" INTERFACE IMPORTED)
+		set_name_if_group(${component}) # Creates ${target_or_group_name}
+		message("proceeding with target_or_group_name : ${target_or_group_name}")
+		set(conan_target CONAN_PKG::boost_${target_or_group_name})
+		message("COMPONENT_PROPERTIES = ${COMPONENT_PROPERTIES}")
+		foreach(property_name ${COMPONENT_PROPERTIES})
+			if(TARGET  ${conan_target})
+				message("getting property of target ${conan_target} :  ${property_name}")
+				get_property(value TARGET ${conan_target} PROPERTY ${property_name} )
+				message("setting property of target ${boost_target} :  ${property_name} = ${value} ")
+				set_property(TARGET ${boost_target} PROPERTY ${property_name} ${value})
 			endif()
-		endforeach(group_name)
-		
-		message("boost_${component}_found value is ${boost_${component}_found}")
-		if (NOT DEFINED ${boost_${component}_found})
-			message("Determined that ${component} is NOT a member of any group")
-			add_cloned_imported_target(Boost::${component}, CONAN_PKG::boost_${component})
-		endif()
-		message("Done Adding library: Boost::${component}")
-	endif()
-endforeach(component)
+		endforeach(property_name)
+    endif()
+endforeach()
+set(Boost_FOUND TRUE)
+
+

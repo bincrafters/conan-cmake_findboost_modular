@@ -1,9 +1,7 @@
-#include <boost/process.hpp>
-
-using namespace boost::process;
+#include <boost/regex.hpp>
 
 int main()
 {
-    ipstream pipe_stream;
-	return 0;
+    boost::regex expression{"\\w+\\s\\w+"};
 }
+

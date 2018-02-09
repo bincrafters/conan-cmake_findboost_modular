@@ -8,7 +8,7 @@ import os
 class TestPackageConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
-    requires = "boost_process/1.66.0@bincrafters/stable"
+    requires = "boost_regex/1.66.0@bincrafters/testing"
 
     def build(self):
         cmake = CMake(self)
