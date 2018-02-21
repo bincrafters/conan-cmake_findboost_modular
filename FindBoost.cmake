@@ -146,6 +146,9 @@ set(Boost_MAJOR_VERSION 1)
 set(Boost_MINOR_VERSION 66)
 set(Boost_SUBMINOR_VERSION 0)
 
+math(EXPR Boost_VERSION "${Boost_MAJOR_VERSION} * 100000 + ${Boost_MINOR_VERSION} * 100 + ${Boost_SUBMINOR_VERSION}" )
+
+
 message(STATUS "Boost_FOUND: ${Boost_FOUND}")
 message(STATUS "Boost_MAJOR_VERSION: ${Boost_MAJOR_VERSION}")
 message(STATUS "Boost_MINOR_VERSION: ${Boost_MINOR_VERSION}")
