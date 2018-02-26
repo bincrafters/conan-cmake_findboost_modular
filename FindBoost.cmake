@@ -229,7 +229,9 @@ foreach(component ${Boost_FIND_COMPONENTS})
     set(Boost_${component_upper}_FOUND TRUE)
 
     message(STATUS "Boost_${component_upper}_FOUND: ${Boost_${component_upper}_FOUND}")
-    message(STATUS "Boost_${component_upper}_LIBRARY: ${Boost_${component_upper}_LIBRARY}")
+    if (DEFINED Boost_${component_upper}_LIBRARY)
+        message(STATUS "Boost_${component_upper}_LIBRARY: ${Boost_${component_upper}_LIBRARY}")
+    endif()
 
     if(NOT TARGET ${boost_target})
 	    add_library("${boost_target}" INTERFACE IMPORTED)
