@@ -203,6 +203,26 @@ if (NOT Boost_FIND_COMPONENTS)
     endforeach()
 endif()
 
+# set Boost_INCLUDE_DIRS
+foreach(component ${Boost_ALL_COMPONENTS})
+    string(TOUPPER ${component} component_upper)
+    if (DEFINED CONAN_BOOST_${component_upper}_ROOT)
+        set_name_if_group(${component}) # Creates ${target_or_group_name}
+        string(TOUPPER ${target_or_group_name} target_or_group_name_upper)
+
+        set(Boost_INCLUDE_DIRS "${Boost_INCLUDE_DIRS};${CONAN_INCLUDE_DIRS_BOOST_${target_or_group_name_upper}}")
+
+        if(NOT CONAN_LIBS_BOOST_${target_or_group_name_upper})
+            set(Boost_INCLUDE_DIRS_HEADER_ONLY "${Boost_INCLUDE_DIRS_HEADER_ONLY};${CONAN_INCLUDE_DIRS_BOOST_${target_or_group_name_upper}}")
+        endif()
+    endif()
+endforeach()
+
+if(NOT TARGET Boost::boost)
+    add_library(Boost::boost INTERFACE IMPORTED)
+    set_property(TARGET Boost::boost PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS_HEADER_ONLY})
+endif()
+
 foreach(component ${Boost_FIND_COMPONENTS})
     string(TOUPPER ${component} component_upper)
     set_name_if_group(${component}) # Creates ${target_or_group_name}
@@ -223,7 +243,7 @@ foreach(component ${Boost_FIND_COMPONENTS})
 	else()
         set(Boost_${component_upper}_LIBRARY ${CONAN_LIBS_BOOST_${component_upper}_ABS})
 	endif()
-    set(Boost_INCLUDE_DIRS "${Boost_INCLUDE_DIRS};${CONAN_INCLUDE_DIRS_BOOST_${target_or_group_name_upper}}")
+
     set(Boost_LIBRARY_DIRS "${Boost_LIBRARY_DIRS};${CONAN_LIB_DIRS_BOOST_${target_or_group_name_upper}} (${target_or_group_name_upper})")
 
     set(Boost_${component_upper}_FOUND TRUE)
