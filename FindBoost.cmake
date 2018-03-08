@@ -223,6 +223,28 @@ if(NOT TARGET Boost::boost)
     set_property(TARGET Boost::boost PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS_HEADER_ONLY})
 endif()
 
+if(NOT TARGET Boost::diagnostic_definitions)
+    add_library(Boost::diagnostic_definitions INTERFACE IMPORTED)
+    if(WIN32)
+        set(Boost_LIB_DIAGNOSTIC_DEFINITIONS "-DBOOST_LIB_DIAGNOSTIC")
+        set_target_properties(Boost::diagnostic_definitions PROPERTIES INTERFACE_COMPILE_DEFINITIONS "BOOST_LIB_DIAGNOSTIC")
+    endif()
+endif()
+
+if(NOT TARGET Boost::disable_autolinking)
+    add_library(Boost::disable_autolinking INTERFACE IMPORTED)
+    if(WIN32)
+        set_target_properties(Boost::disable_autolinking PROPERTIES INTERFACE_COMPILE_DEFINITIONS "BOOST_ALL_NO_LIB")
+    endif()
+endif()
+
+if(NOT TARGET Boost::dynamic_linking)
+    add_library(Boost::dynamic_linking INTERFACE IMPORTED)
+    if(WIN32)
+        set_target_properties(Boost::dynamic_linking PROPERTIES INTERFACE_COMPILE_DEFINITIONS "BOOST_ALL_DYN_LINK")
+    endif()
+endif()
+
 foreach(component ${Boost_FIND_COMPONENTS})
     string(TOUPPER ${component} component_upper)
     set_name_if_group(${component}) # Creates ${target_or_group_name}
