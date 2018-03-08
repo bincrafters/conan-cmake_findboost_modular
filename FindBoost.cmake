@@ -212,15 +212,12 @@ foreach(component ${Boost_ALL_COMPONENTS})
 
         set(Boost_INCLUDE_DIRS "${Boost_INCLUDE_DIRS};${CONAN_INCLUDE_DIRS_BOOST_${target_or_group_name_upper}}")
 
-        if(NOT CONAN_LIBS_BOOST_${target_or_group_name_upper})
-            set(Boost_INCLUDE_DIRS_HEADER_ONLY "${Boost_INCLUDE_DIRS_HEADER_ONLY};${CONAN_INCLUDE_DIRS_BOOST_${target_or_group_name_upper}}")
-        endif()
     endif()
 endforeach()
 
 if(NOT TARGET Boost::boost)
     add_library(Boost::boost INTERFACE IMPORTED)
-    set_property(TARGET Boost::boost PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS_HEADER_ONLY})
+    set_property(TARGET Boost::boost PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS})
 endif()
 
 if(NOT TARGET Boost::diagnostic_definitions)
