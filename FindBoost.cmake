@@ -193,16 +193,6 @@ winapi
 xpressive
 )
 
-if (NOT Boost_FIND_COMPONENTS)
-    message(STATUS "no components")
-    foreach(component ${Boost_ALL_COMPONENTS})
-        string(TOUPPER ${component} component_upper)
-        if (DEFINED CONAN_BOOST_${component_upper}_ROOT)
-            list(APPEND Boost_FIND_COMPONENTS ${component})
-        endif()
-    endforeach()
-endif()
-
 # set Boost_INCLUDE_DIRS
 foreach(component ${Boost_ALL_COMPONENTS})
     string(TOUPPER ${component} component_upper)
