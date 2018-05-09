@@ -292,11 +292,29 @@ foreach(component ${Boost_FIND_COMPONENTS})
 
             # NOTE: component_upper instead of target_or_group_name_upper is intentional
             set_property(TARGET ${boost_target} PROPERTY INTERFACE_LINK_LIBRARIES
-                ${CONAN_LIBS_BOOST_${component_upper}_ABS} ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_LIST} ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_LIST}
-                $<$<CONFIG:Release>:${CONAN_LIBS_BOOST_${component_upper}_RELEASE_ABS} ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}>
-                $<$<CONFIG:RelWithDebInfo>:${CONAN_LIBS_BOOST_${component_upper}_RELEASE_ABS} ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST} ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}>
-                $<$<CONFIG:MinSizeRel>:${CONAN_LIBS_BOOST_${component_upper}_RELEASE_ABS} ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST} ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}>
-                $<$<CONFIG:Debug>:${CONAN_LIBS_BOOST_${component_upper}_DEBUG_ABS} ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_DEBUG_LIST} ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_DEBUG_LIST}>
+                ${CONAN_PACKAGE_TARGETS_BOOST_${component_upper}}
+                ${CONAN_LIBS_BOOST_${component_upper}_ABS}
+                ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_LIST}
+                ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_LIST}
+                $<$<CONFIG:Release>:
+                ${CONAN_PACKAGE_TARGETS_BOOST_${component_upper}_RELEASE}
+                ${CONAN_LIBS_BOOST_${component_upper}_RELEASE_ABS}
+                ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}
+                ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}>
+                $<$<CONFIG:RelWithDebInfo>:
+                ${CONAN_PACKAGE_TARGETS_BOOST_${component_upper}_RELEASE}
+                ${CONAN_LIBS_BOOST_${component_upper}_RELEASE_ABS}
+                ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}
+                ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}>
+                $<$<CONFIG:MinSizeRel>:
+                ${CONAN_PACKAGE_TARGETS_BOOST_${component_upper}_RELEASE}
+                ${CONAN_LIBS_BOOST_${component_upper}_RELEASE_ABS}
+                ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}
+                ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_RELEASE_LIST}>
+                $<$<CONFIG:Debug>:${CONAN_LIBS_BOOST_${component_upper}_DEBUG_ABS}
+                ${CONAN_PACKAGE_TARGETS_BOOST_${component_upper}_DEBUG}
+                ${CONAN_SHARED_LINKER_FLAGS_BOOST_${component_upper}_DEBUG_LIST}
+                ${CONAN_EXE_LINKER_FLAGS_BOOST_${component_upper}_DEBUG_LIST}>
                 )
 
             set_property(TARGET ${boost_target} PROPERTY INTERFACE_COMPILE_DEFINITIONS
