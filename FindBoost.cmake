@@ -1,43 +1,43 @@
 # see https://cmake.org/cmake/help/v3.11/module/FindBoost.html
 
 string(REPLACE "," ";" BOOST_LEVEL5GROUP
-	"${CONAN_USER_BOOST_LEVEL5GROUP_lib_short_names}"
+    "${CONAN_USER_BOOST_LEVEL5GROUP_lib_short_names}"
 )
 
 string(REPLACE "," ";" BOOST_LEVEL8GROUP
-	"${CONAN_USER_BOOST_LEVEL8GROUP_lib_short_names}"
+    "${CONAN_USER_BOOST_LEVEL8GROUP_lib_short_names}"
 )
 
 string(REPLACE "," ";" BOOST_LEVEL11GROUP
-	"${CONAN_USER_BOOST_LEVEL11GROUP_lib_short_names}"
+    "${CONAN_USER_BOOST_LEVEL11GROUP_lib_short_names}"
 )
 
 string(REPLACE "," ";" BOOST_LEVEL14GROUP
-	"${CONAN_USER_BOOST_LEVEL14GROUP_lib_short_names}"
+    "${CONAN_USER_BOOST_LEVEL14GROUP_lib_short_names}"
 )
 
 set(LEVEL_GROUPS
-	LEVEL5GROUP
-	LEVEL8GROUP
-	LEVEL11GROUP
-	LEVEL14GROUP
+    LEVEL5GROUP
+    LEVEL8GROUP
+    LEVEL11GROUP
+    LEVEL14GROUP
 )
 
 set(COMPONENT_PROPERTIES 
-	INTERFACE_LINK_LIBRARIES 
-	INTERFACE_INCLUDE_DIRECTORIES 
-	INTERFACE_COMPILE_DEFINITIONS 
-	INTERFACE_COMPILE_OPTIONS
+    INTERFACE_LINK_LIBRARIES
+    INTERFACE_INCLUDE_DIRECTORIES
+    INTERFACE_COMPILE_DEFINITIONS
+    INTERFACE_COMPILE_OPTIONS
 )
 
 function(set_name_if_group target_name)
     set(target_or_group_name ${target_name} PARENT_SCOPE)
     foreach(group_name ${LEVEL_GROUPS})
-		LIST(FIND BOOST_${group_name} ${target_name} FOUND_INDEX)
-		if((${FOUND_INDEX} GREATER 0) OR (${FOUND_INDEX} EQUAL 0))
-			set(target_or_group_name ${group_name} PARENT_SCOPE)
-			break()
-		endif()
+        LIST(FIND BOOST_${group_name} ${target_name} FOUND_INDEX)
+        if((${FOUND_INDEX} GREATER 0) OR (${FOUND_INDEX} EQUAL 0))
+            set(target_or_group_name ${group_name} PARENT_SCOPE)
+            break()
+        endif()
     endforeach()
 endfunction()
 
@@ -249,9 +249,9 @@ foreach(component ${Boost_FIND_COMPONENTS})
 
     if(TARGET ${conan_target})
         set(Boost_${component_upper}_LIBRARY ${conan_target})
-	else()
+    else()
         set(Boost_${component_upper}_LIBRARY ${CONAN_LIBS_BOOST_${component_upper}_ABS})
-	endif()
+    endif()
 
     set(Boost_LIBRARY_DIRS "${Boost_LIBRARY_DIRS};${CONAN_LIB_DIRS_BOOST_${target_or_group_name_upper}}")
 
@@ -263,7 +263,7 @@ foreach(component ${Boost_FIND_COMPONENTS})
     endif()
 
     if(NOT TARGET ${boost_target})
-	    add_library("${boost_target}" INTERFACE IMPORTED)
+        add_library("${boost_target}" INTERFACE IMPORTED)
 
         if(TARGET ${conan_target})
             set_property(TARGET ${boost_target} PROPERTY INTERFACE_LINK_LIBRARIES ${conan_target})
