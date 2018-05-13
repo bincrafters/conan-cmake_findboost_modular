@@ -253,7 +253,7 @@ foreach(component ${Boost_FIND_COMPONENTS})
         set(Boost_${component_upper}_LIBRARY ${CONAN_LIBS_BOOST_${component_upper}_ABS})
 	endif()
 
-    set(Boost_LIBRARY_DIRS "${Boost_LIBRARY_DIRS};${CONAN_LIB_DIRS_BOOST_${target_or_group_name_upper}} (${target_or_group_name_upper})")
+    set(Boost_LIBRARY_DIRS "${Boost_LIBRARY_DIRS};${CONAN_LIB_DIRS_BOOST_${target_or_group_name_upper}}")
 
     set(Boost_${component_upper}_FOUND TRUE)
 
