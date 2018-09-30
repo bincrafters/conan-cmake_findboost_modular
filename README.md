@@ -28,13 +28,13 @@ Note: It is recommended that you run conan install from a build directory and no
 
 there are multiple varinats on how you can use `find_package`
 
-#### CMake variables (modern CMake)
+#### CMake targets (modern CMake)
+
 ```
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 find_package(Boost COMPONENTS REQUIRED regex system date_time asio)
-target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PUBLIC ${Boost_REGEX_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_DATE_TIME_LIBRARY} ${Boost_ASIO_LIBRARY})
+target_link_libraries(${PROJECT_NAME} PUBLIC Boost::regex Boost::system Boost::date_time Boost::asio)
 ```
 
 #### CMake all-in-one target (modern CMake)
@@ -46,13 +46,13 @@ find_package(Boost COMPONENTS REQUIRED regex system date_time asio)
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::Boost)
 ```
 
-#### CMake targets (ancient CMake)
-
+#### CMake variables (ancient CMake)
 ```
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 find_package(Boost COMPONENTS REQUIRED regex system date_time asio)
-target_link_libraries(${PROJECT_NAME} PUBLIC Boost::regex Boost::system Boost::date_time Boost::asio)
+target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${Boost_REGEX_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_DATE_TIME_LIBRARY} ${Boost_ASIO_LIBRARY})
 ```
 
 #### Conan variables
