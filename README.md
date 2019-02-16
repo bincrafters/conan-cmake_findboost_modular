@@ -5,8 +5,6 @@
 |[ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-cmake-findboost-modular)](https://ci.appveyor.com/project/BinCrafters/conan-cmake-findboost-modular)|N/A|
 
 
-The packages generated with this **conanfile** can be found in [Bintray](https://bintray.com/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters).
-
 ## For Users: Use this package
 
 ### Basic setup
