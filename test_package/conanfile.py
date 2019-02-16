@@ -8,10 +8,10 @@ import os
 class TestPackageConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
-    requires = ("boost_regex/1.67.0@bincrafters/testing",
-                "boost_system/1.67.0@bincrafters/testing",
-                "boost_date_time/1.67.0@bincrafters/testing",  # part of group
-                "boost_asio/1.67.0@bincrafters/testing")  # header-only
+    requires = ("boost_regex/1.67.0@bincrafters/stable",
+                "boost_system/1.67.0@bincrafters/stable",
+                "boost_date_time/1.67.0@bincrafters/stable",  # part of group
+                "boost_asio/1.67.0@bincrafters/stable")  # header-only
 
 
     def build(self):
