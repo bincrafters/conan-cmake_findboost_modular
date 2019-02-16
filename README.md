@@ -5,20 +5,18 @@
 |[ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-cmake-findboost-modular)](https://ci.appveyor.com/project/BinCrafters/conan-cmake-findboost-modular)|N/A|
 
 
-The packages generated with this **conanfile** can be found in [Bintray](https://bintray.com/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters).
-
 ## For Users: Use this package
 
 ### Basic setup
 
-    $ conan install cmake_findboost_modular/1.69.0@bincrafters/stable
+    $ conan install cmake_findboost_modular/1.68.0@bincrafters/stable
 
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    cmake_findboost_modular/1.69.0@bincrafters/stable
+    cmake_findboost_modular/1.68.0@bincrafters/stable
 
     [generators]
     txt
@@ -94,7 +92,7 @@ The following command both runs all the steps of the conan file, and publishes t
 
 ## Upload
 
-    $ conan upload cmake_findboost_modular/1.69.0@bincrafters/stable --all -r bincrafters
+    $ conan upload cmake_findboost_modular/1.68.0@bincrafters/stable --all -r bincrafters
 
 ## License
 [MIT](LICENSE)
