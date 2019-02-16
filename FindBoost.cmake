@@ -1,26 +1,26 @@
 # see https://cmake.org/cmake/help/v3.11/module/FindBoost.html
 
-string(REPLACE "," ";" BOOST_LEVEL5GROUP
-    "${CONAN_USER_BOOST_LEVEL5GROUP_lib_short_names}"
+string(REPLACE "," ";" BOOST_CYCLE_GROUP_A
+    "${CONAN_USER_BOOST_CYCLE_GROUP_A_lib_short_names}"
 )
 
-string(REPLACE "," ";" BOOST_LEVEL8GROUP
-    "${CONAN_USER_BOOST_LEVEL8GROUP_lib_short_names}"
+string(REPLACE "," ";" BOOST_CYCLE_GROUP_B
+    "${CONAN_USER_BOOST_CYCLE_GROUP_B_lib_short_names}"
 )
 
-string(REPLACE "," ";" BOOST_LEVEL11GROUP
-    "${CONAN_USER_BOOST_LEVEL11GROUP_lib_short_names}"
+string(REPLACE "," ";" BOOST_CYCLE_GROUP_C
+    "${CONAN_USER_BOOST_CYCLE_GROUP_C_lib_short_names}"
 )
 
-string(REPLACE "," ";" BOOST_LEVEL14GROUP
-    "${CONAN_USER_BOOST_LEVEL14GROUP_lib_short_names}"
+string(REPLACE "," ";" BOOST_CYCLE_GROUP_D
+    "${CONAN_USER_BOOST_CYCLE_GROUP_D_lib_short_names}"
 )
 
-set(LEVEL_GROUPS
-    LEVEL5GROUP
-    LEVEL8GROUP
-    LEVEL11GROUP
-    LEVEL14GROUP
+set(CYCLE_GROUPS
+    BOOST_CYCLE_GROUP_A
+    BOOST_CYCLE_GROUP_B
+    BOOST_CYCLE_GROUP_C
+    BOOST_CYCLE_GROUP_D
 )
 
 set(COMPONENT_PROPERTIES 
@@ -32,7 +32,7 @@ set(COMPONENT_PROPERTIES
 
 function(set_name_if_group target_name)
     set(target_or_group_name ${target_name} PARENT_SCOPE)
-    foreach(group_name ${LEVEL_GROUPS})
+    foreach(group_name ${CYCLE_GROUPS})
         LIST(FIND BOOST_${group_name} ${target_name} FOUND_INDEX)
         if((${FOUND_INDEX} GREATER 0) OR (${FOUND_INDEX} EQUAL 0))
             set(target_or_group_name ${group_name} PARENT_SCOPE)
@@ -41,7 +41,7 @@ function(set_name_if_group target_name)
     endforeach()
 endfunction()
 
-message(STATUS "bincrafter's custom FindBoost.cmake")
+message(STATUS "Bincrafter's custom FindBoost.cmake")
 
 function(libraries_to_abs libraries libdir libraries_abs_path)
     foreach(_LIBRARY_NAME ${libraries})
@@ -72,7 +72,6 @@ atomic
 beast
 bimap
 bind
-build
 callable_traits
 chrono
 circular_buffer
@@ -81,13 +80,19 @@ compute
 concept_check
 config
 container
+container_hash
 context
+contract
 conversion
 convert
 core
 coroutine
 coroutine2
 crc
+cycle_group_a
+cycle_group_b
+cycle_group_c
+cycle_group_d
 date_time
 detail
 disjoint_sets
@@ -104,13 +109,13 @@ function
 function_types
 functional
 fusion
-generator
 geometry
 gil
 graph
 graph_parallel
 hana
 heap
+hof
 icl
 integer
 interprocess
@@ -129,7 +134,6 @@ math
 metaparse
 move
 mp11
-mpi
 mpl
 msm
 multi_array
@@ -140,8 +144,8 @@ numeric_interval
 numeric_odeint
 numeric_ublas
 optional
-package_tools
 parameter
+parameter_python
 phoenix
 poly_collection
 polygon
@@ -161,9 +165,10 @@ range
 ratio
 rational
 regex
+safe_numerics
 scope_exit
 serialization
-signals
+signals2
 smart_ptr
 sort
 spirit
@@ -191,6 +196,7 @@ vmd
 wave
 winapi
 xpressive
+yap
 )
 
 # set Boost_INCLUDE_DIRS
