@@ -13,7 +13,6 @@ class TestPackageConan(ConanFile):
                 "boost_date_time/1.67.0@bincrafters/testing",  # part of group
                 "boost_asio/1.67.0@bincrafters/testing")  # header-only
 
-
     def build(self):
         for build_variant in ['FIND_PACKAGE', 'FIND_PACKAGE_TARGETS']:
             for conan_variant in ['CONAN', 'CONAN_TARGETS']:
