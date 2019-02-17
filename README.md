@@ -2,7 +2,7 @@
 
 | Bintray | Windows | Linux & macOS | 
 |:--------:|:---------:|:-----------------:|
-|[ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-cmake-findboost-modular)](https://ci.appveyor.com/project/BinCrafters/conan-cmake-findboost-modular)|N/A|
+|[ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/cmake_findboost_modular%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-cmake_findboost_modular)](https://ci.appveyor.com/project/BinCrafters/conan-cmake_findboost_modular)|N/A|
 
 
 ## For Users: Use this package
