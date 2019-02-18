@@ -1,26 +1,26 @@
 # see https://cmake.org/cmake/help/v3.11/module/FindBoost.html
 
-string(REPLACE "," ";" BOOST_CYCLE_GROUP_A
-    "${CONAN_USER_BOOST_CYCLE_GROUP_A_lib_short_names}"
+string(REPLACE "," ";" BOOST_LEVEL5GROUP
+    "${CONAN_USER_BOOST_LEVEL5GROUP_lib_short_names}"
 )
 
-string(REPLACE "," ";" BOOST_CYCLE_GROUP_B
-    "${CONAN_USER_BOOST_CYCLE_GROUP_B_lib_short_names}"
+string(REPLACE "," ";" BOOST_LEVEL8GROUP
+    "${CONAN_USER_BOOST_LEVEL8GROUP_lib_short_names}"
 )
 
-string(REPLACE "," ";" BOOST_CYCLE_GROUP_C
-    "${CONAN_USER_BOOST_CYCLE_GROUP_C_lib_short_names}"
+string(REPLACE "," ";" BOOST_LEVEL11GROUP
+    "${CONAN_USER_BOOST_LEVEL11GROUP_lib_short_names}"
 )
 
-string(REPLACE "," ";" BOOST_CYCLE_GROUP_D
-    "${CONAN_USER_BOOST_CYCLE_GROUP_D_lib_short_names}"
+string(REPLACE "," ";" BOOST_LEVEL14GROUP
+    "${CONAN_USER_BOOST_LEVEL14GROUP_lib_short_names}"
 )
 
-set(CYCLE_GROUPS
-    BOOST_CYCLE_GROUP_A
-    BOOST_CYCLE_GROUP_B
-    BOOST_CYCLE_GROUP_C
-    BOOST_CYCLE_GROUP_D
+set(LEVEL_GROUPS
+    LEVEL5GROUP
+    LEVEL8GROUP
+    LEVEL11GROUP
+    LEVEL14GROUP
 )
 
 set(COMPONENT_PROPERTIES 
