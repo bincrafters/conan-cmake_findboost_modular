@@ -7,7 +7,6 @@ class CMakeFindboostModularConan(ConanFile):
     url = "https://github.com/bincrafters/cmake_findboost_modular"
     description = "Enables use of Boost Modular Packages with traditional CMake FindBoost"
     license = "MIT"
-    exports = ["LICENSE.md"]
     exports_sources = ["FindBoost.cmake"]
         
     def package(self):
